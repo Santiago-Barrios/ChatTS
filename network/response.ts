@@ -1,7 +1,17 @@
-exports.success = (req, res) => {
-//
+import {  NextFunction, Request, Response } from "express";
+
+const success = (req: Request, res: Response, message: any, status: number) => {
+    res.status(status || 200).send({
+        error: '', 
+        body: message
+    }); 
 }
 
-exports.error = (req, res) => {
-//
+const error = (req: Request, res: Response, message: any, status: number) => {
+    res.status(status || 500).send({
+        error: message,
+        body: '',
+    });
 }
+
+export default { success, error }
