@@ -7,7 +7,8 @@ const success = (req: Request, res: Response, message: any, status: number) => {
     }); 
 }
 
-const error = (req: Request, res: Response, message: any, status: number) => {
+const error = (req: Request, res: Response, message: any, status: number, details: string) => {
+    console.error( '[response error] ' + details )
     res.status(status || 500).send({
         error: message,
         body: '',

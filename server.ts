@@ -19,7 +19,7 @@ router.get('/message', (req: any, res: Response) =>{
 router.post('/message', (req: Request, res: Response) => {
     console.log(req.query);
     if( req.query.error === "ok" ){
-        HandleResponse.error(req, res, 'Error Simulado', 401);
+        HandleResponse.error(req, res, 'Error Simulado', 401, 'prueba del error');
     } else{
         HandleResponse.success(req, res, 'Creado correctamente', 201);
     }
