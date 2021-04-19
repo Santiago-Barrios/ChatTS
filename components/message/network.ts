@@ -4,11 +4,13 @@ import Controller from "../message/controller";
 const router = express.Router();
 
 router.get("/", (req: any, res: Response) => {
-  // console.log(req.headers);
-  res.header({
-    "custom-header": "Nuestro Valor personalizado",
-  });
-  HandleResponse.success(req, res, "lista de mensajes", 201);
+  Controller.getMessages()
+    .then( (messageList) => {
+      HandleResponse.success(req, res, messageList, 200);
+    } )
+    .catch( e => {
+      HandleResponse.error(req, res, 'Unexpected Error', 500, e );
+    } )
 });
 
 router.post("/", (req: any, res: Response) => {
@@ -18,7 +20,7 @@ router.post("/", (req: any, res: Response) => {
     .then( (fullMessage) => {
       HandleResponse.success(req, res, fullMessage , 201);
     })
-    .catch( (e) =>{
+    .catch( (e) => {
       HandleResponse.error(req, res, 'Información invalida', 400, 'Error para logear usuario');
     });
 
