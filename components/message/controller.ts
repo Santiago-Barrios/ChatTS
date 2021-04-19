@@ -19,9 +19,9 @@ const addMessage = ( user: string, message: string ) => {
     } )
 };
 
-const getMessages = () =>{
+const getMessages = (filterUSer) =>{
     return new Promise( (resolve, reject) =>{
-        resolve(store.list());
+        resolve(store.list(filterUSer));
     } );
 }
 
@@ -33,7 +33,6 @@ const updateMessage = (id, message) =>{
             return false;
         }else{
             const result = await store.updateText(id, message);
-            console.log(result);
             resolve(result);
         }
     } )

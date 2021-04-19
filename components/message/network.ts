@@ -2,9 +2,12 @@ import express, { Request, Response, NextFunction } from "express";
 import HandleResponse from "../../network/response";
 import Controller from "../message/controller";
 const router = express.Router();
-
+// consulta mensaje
 router.get("/", (req: any, res: Response) => {
-  Controller.getMessages()
+
+  const fliterMessages = req.query.user || null;
+
+  Controller.getMessages(fliterMessages)
     .then( (messageList) => {
       HandleResponse.success(req, res, messageList, 200);
     } )
@@ -12,7 +15,7 @@ router.get("/", (req: any, res: Response) => {
       HandleResponse.error(req, res, 'Unexpected Error', 500, e );
     } )
 });
-
+// agrega mensajes
 router.post("/", (req: any, res: Response) => {
 
   const body = req.body;
@@ -25,7 +28,7 @@ router.post("/", (req: any, res: Response) => {
     });
 
 });
-
+// actualiza mensaje de usuario según el id
 router.post('/:id', (req: any, res: Response) => {
 
   const id = req.params.id;

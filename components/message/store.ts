@@ -21,8 +21,12 @@ const addMessage = (message) => {
     myMessage.save();
 };
 
-const getMessages = async () => {
-    const messages = await Model.find();
+const getMessages = async (filterUSer) => {
+    let filter = {}; 
+    if(filterUSer){
+        filter = { user: new RegExp (filterUSer, "i") } //expresión regular
+    }
+    const messages = await Model.find(filter);
     return messages;
 };
 
