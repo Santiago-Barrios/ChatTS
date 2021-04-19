@@ -25,7 +25,23 @@ const getMessages = () =>{
     } );
 }
 
+const updateMessage = (id, message) =>{
+
+    return new Promise( async (resolve, reject) =>{
+        if(!id || !message){
+            reject('Invalid data');
+            return false;
+        }else{
+            const result = await store.updateText(id, message);
+            console.log(result);
+            resolve(result);
+        }
+    } )
+
+}
+
 export default {
     addMessage,
-    getMessages
+    getMessages,
+    updateMessage
 }

@@ -26,4 +26,17 @@ router.post("/", (req: any, res: Response) => {
 
 });
 
+router.post('/:id', (req: any, res: Response) => {
+
+  const id = req.params.id;
+  const text = req.body.message;
+
+  Controller.updateMessage(id, text)
+    .then( (data) => {
+      HandleResponse.success(req, res, data, 200);
+    })
+    .catch( (e) => {
+      HandleResponse.error(req, res, 'Error interno', 500, e);
+    })
+});
 export default router;

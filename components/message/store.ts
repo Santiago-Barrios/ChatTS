@@ -22,15 +22,22 @@ const addMessage = (message) => {
 };
 
 const getMessages = async () => {
-    // return list;
     const messages = await Model.find();
     return messages;
+};
+
+const updateText = async (id: any, message: string) =>{
+    
+    const messageFind = await Model.findOne({ _id : id });
+    messageFind.message = message;
+    const newMessage = await messageFind.save();
+    return newMessage;
+
 };
 
 export default {
     add: addMessage,
     list: getMessages,
-    // get
-    // update
+    updateText,
     // delete
 }

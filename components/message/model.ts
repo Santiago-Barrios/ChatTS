@@ -1,6 +1,11 @@
-import mongoose from "mongoose";
+import mongoose, {model, Schema, Document} from "mongoose";
 
-const Schema = mongoose.Schema;
+export interface MUser extends Document {
+    user: string,
+    message: string,
+    date: any,
+}
+
 const mySchema = new Schema({
     user: String,
     message:{
@@ -10,5 +15,4 @@ const mySchema = new Schema({
     date: Date,
 });
 
-const model = mongoose.model("Message", mySchema);
-export default model;
+export default model<MUser>("Message", mySchema);
