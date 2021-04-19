@@ -31,7 +31,7 @@ const getMessages = async (filterUSer) => {
 };
 
 const updateText = async (id: any, message: string) =>{
-    
+
     const messageFind = await Model.findOne({ _id : id });
     messageFind.message = message;
     const newMessage = await messageFind.save();
@@ -39,9 +39,13 @@ const updateText = async (id: any, message: string) =>{
 
 };
 
+const removeMessage = async (id) => {
+   return  Model.deleteOne({ _id : id });
+}
+
 export default {
     add: addMessage,
     list: getMessages,
     updateText,
-    // delete
+    remove: removeMessage
 }

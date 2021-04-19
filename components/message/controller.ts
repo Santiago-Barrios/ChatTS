@@ -37,10 +37,29 @@ const updateMessage = (id, message) =>{
         }
     } )
 
+};
+
+const deleteMessage = (id) => {
+
+    return new Promise( async (resolve, reject) => {
+        if(!id){
+            reject('Invalid data');
+            return false;
+        } else{
+            store.remove(id)
+                .then( () => {
+                    resolve('ok');
+                } )
+                .catch( e => {
+                    reject(e)
+                } )
+        }
+    } )
 }
 
 export default {
     addMessage,
     getMessages,
-    updateMessage
+    updateMessage,
+    deleteMessage
 }
