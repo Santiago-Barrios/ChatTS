@@ -11,7 +11,7 @@ const error = (req: Request, res: Response, message: any, status: number, detail
     console.error( '[response error] ' + details )
     res.status(status || 500).send({
         error: message,
-        body: '',
+        body: ''
     });
 }
 
