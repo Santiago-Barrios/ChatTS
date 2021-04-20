@@ -1,3 +1,4 @@
+import { readableObjectMode } from "express/lib/request";
 import Model from "./model";
 
 
@@ -6,13 +7,23 @@ const addMessage = (message) => {
     myMessage.save();
 };
 
-const getMessages = async (filterUSer) => {
-    let filter = {}; 
-    if(filterUSer){
-        filter = { user: new RegExp (filterUSer, "i") } //expresión regular
-    }
-    const messages = await Model.find(filter);
-    return messages;
+const getMessages = (filterUSer) => {
+
+    return new Promise( (resolve, reject) =>{
+        let filter = {}; 
+        if(filterUSer){
+            filter = { user: new RegExp (filterUSer, "i") } //expresión regular
+        }
+        Model.find(filter)
+            .populate('user')
+            .exec((error, populated) => {
+                if(error){
+                    reject(error)
+                    return false;
+                }
+                resolve(populated);
+            })
+    })
 };
 
 const updateText = async (id: any, message: string) =>{

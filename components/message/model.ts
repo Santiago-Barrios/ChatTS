@@ -1,13 +1,16 @@
 import mongoose, {model, Schema, Document} from "mongoose";
 
 export interface MessageUser extends Document {
-    user: string,
+    user:  mongoose.Schema.Types.ObjectId,
     message: string,
     date: any,
 }
 
 const mySchema = new Schema({
-    user: String,
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     message:{
         type: String,
         required: true
