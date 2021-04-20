@@ -1,12 +1,17 @@
 import mongoose, {model, Schema, Document} from "mongoose";
 
 export interface MessageUser extends Document {
+    chat: mongoose.Schema.Types.ObjectId,
     user:  mongoose.Schema.Types.ObjectId,
     message: string,
     date: any,
 }
 
 const mySchema = new Schema({
+    chat: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Chat'
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'

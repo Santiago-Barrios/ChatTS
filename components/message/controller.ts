@@ -1,13 +1,14 @@
 import store from "./store";
 
-const addMessage = ( user: string, message: string ) => {
+const addMessage = ( chat: string, user: string, message: string ) => {
     return new Promise( (resolve, reject) =>{
-        if( !user || !message){
+        if( !chat || !user || !message){
             console.error('[messagesController] No hay usuario o mensaje')
             reject('Los datos son incorrectos');
             return false;
         }else{
             const fullMessage = {
+                chat,
                 user,
                 message,
                 date: new Date(),

@@ -5,7 +5,7 @@ const router = express.Router();
 // consulta mensaje
 router.get("/", (req: any, res: Response) => {
 
-  const fliterMessages = req.query.user || null;
+  const fliterMessages = req.query.chat || null;
 
   Controller.getMessages(fliterMessages)
     .then( (messageList) => {
@@ -19,7 +19,7 @@ router.get("/", (req: any, res: Response) => {
 router.post("/", (req: any, res: Response) => {
 
   const body = req.body;
-  Controller.addMessage(body.user, body.message)
+  Controller.addMessage(req.body.chat, body.user, body.message)
     .then( (fullMessage) => {
       HandleResponse.success(req, res, fullMessage , 201);
     })
