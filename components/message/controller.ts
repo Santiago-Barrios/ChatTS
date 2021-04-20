@@ -1,17 +1,22 @@
 import store from "./store";
 
-const addMessage = ( chat: string, user: string, message: string ) => {
+const addMessage = ( chat: string, user: string, message: string, file:any ) => {
     return new Promise( (resolve, reject) =>{
         if( !chat || !user || !message){
             console.error('[messagesController] No hay usuario o mensaje')
             reject('Los datos son incorrectos');
             return false;
         }else{
+            let fileUrl = '';
+            if(file){
+               fileUrl = "http://localhost:3000/app/files/" + file.filename; 
+            }
             const fullMessage = {
                 chat,
                 user,
                 message,
                 date: new Date(),
+                file: fileUrl,
             };
             store.add(fullMessage);
             resolve( fullMessage );

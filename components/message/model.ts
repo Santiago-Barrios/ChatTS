@@ -5,6 +5,7 @@ export interface MessageUser extends Document {
     user:  mongoose.Schema.Types.ObjectId,
     message: string,
     date: any,
+    file: any
 }
 
 const mySchema = new Schema({
@@ -21,6 +22,7 @@ const mySchema = new Schema({
         required: true
     },
     date: Date,
+    file: String
 });
 
 export default model<MessageUser>("Message", mySchema);
