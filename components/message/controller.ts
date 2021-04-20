@@ -1,4 +1,4 @@
-import store from "../../components/message/store";
+import store from "./store";
 
 const addMessage = ( user: string, message: string ) => {
     return new Promise( (resolve, reject) =>{
@@ -12,7 +12,6 @@ const addMessage = ( user: string, message: string ) => {
                 message,
                 date: new Date(),
             };
-            console.log(fullMessage);
             store.add(fullMessage);
             resolve( fullMessage );
         }

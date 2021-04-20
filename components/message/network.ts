@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import HandleResponse from "../../network/response";
-import Controller from "../message/controller";
+import Controller from "./controller";
 const router = express.Router();
 // consulta mensaje
 router.get("/", (req: any, res: Response) => {
